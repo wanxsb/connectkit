@@ -4,6 +4,7 @@ import { SIWEContext, StatusState, SIWESession } from './SIWEContext';
 type HookProps = {
   isSignedIn: boolean;
   data?: SIWESession;
+  nonce?: string;
   status: StatusState;
   error?: Error | any;
   isRejected: boolean;
@@ -33,6 +34,7 @@ export const useSIWE = ({ onSignIn, onSignOut }: UseSIWEConfig = {}):
     return {
       isSignedIn: false,
       data: undefined,
+      nonce: undefined,
       status: StatusState.ERROR,
       error: new Error('useSIWE hook must be inside a SIWEProvider.'),
       isRejected: false,
@@ -74,6 +76,7 @@ export const useSIWE = ({ onSignIn, onSignOut }: UseSIWEConfig = {}):
           chainId: chainId as number,
         }
       : undefined,
+    nonce: nonce?.data,
     status: currentStatus,
     error: session.error || nonce.error,
     isRejected,
