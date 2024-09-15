@@ -40,12 +40,16 @@ export type WalletConfigProps = {
   };
   // Create URI for QR code, where uri is encoded data from WalletConnect
   getWalletConnectDeeplink?: (uri: string) => string;
+  shouldDeeplinkDesktop?: boolean;
 };
 
 // Organised in alphabetical order by key
 export const walletConfigs: {
   [rdns: string]: WalletConfigProps; // for multiple cases seperate rdns by comma
 } = {
+  mock: {
+    icon: <Logos.Mock />,
+  },
   argent: {
     name: 'Argent',
     icon: <Logos.Argent />,
@@ -61,11 +65,28 @@ export const walletConfigs: {
         : `https://argent.link/app/wc?uri=${encodeURIComponent(uri)}`;
     },
   },
-  'coinbaseWallet, com.coinbase.wallet, coinbaseWalletSDK': {
+  'coinbaseWallet, coinbaseWalletSDK': {
     name: 'Coinbase Wallet',
     shortName: 'Coinbase',
     icon: <Logos.Coinbase background />,
     iconShape: 'squircle',
+    downloadUrls: {
+      download: 'https://connect.family.co/v0/download/coinbasewallet',
+      website: 'https://www.coinbase.com/wallet/getting-started-extension',
+      android: 'https://play.google.com/store/apps/details?id=org.toshi',
+      ios: 'https://apps.apple.com/app/coinbase-wallet-store-crypto/id1278383455',
+      chrome:
+        'https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad',
+    },
+    getWalletConnectDeeplink: (uri: string) => {
+      return `https://go.cb-w.com/wc?uri=${encodeURIComponent(uri)}`;
+    },
+  },
+  'com.coinbase.wallet': {
+    name: 'Coinbase Wallet',
+    shortName: 'Coinbase',
+    icon: <Logos.Coinbase background />,
+    iconShape: 'circle',
     downloadUrls: {
       download: 'https://connect.family.co/v0/download/coinbasewallet',
       website: 'https://www.coinbase.com/wallet/getting-started-extension',
@@ -145,7 +166,7 @@ export const walletConfigs: {
     shortName: 'Browser',
     icon: <Logos.Injected />,
   },
-  'metaMask, metaMask-io, io.metamask, io.metamask.mobile': {
+  'metaMask, metaMask-io, io.metamask, io.metamask.mobile, metaMaskSDK': {
     name: 'MetaMask',
     icon: <Logos.MetaMask />,
     iconConnector: <Logos.MetaMask />,
@@ -336,6 +357,7 @@ export const walletConfigs: {
         ? uri
         : `ledgerlive://wc?uri=${encodeURIComponent(uri)}`;
     },
+    shouldDeeplinkDesktop: true,
   },
   zerion: {
     name: 'Zerion',

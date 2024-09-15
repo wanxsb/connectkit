@@ -1,3 +1,58 @@
+# 1.8.2
+
+This update includes improvements to the `CoinbaseWalletSDK` connect popup and `MockConnector`.
+
+## Fixed
+
+- `CoinbaseWalletSDK` connect popup now works on first interaction.
+- `MockConnector` now working as intended.
+
+# 1.8.1
+
+This update adds additional localisations, and improves the stability of Coinbase Wallet and MetaMask connections.
+
+## New
+
+- Localisations for `Vietnamese`, `Turkish`, `Persian`, `Arabic`, `Russian`, `Estonian` and `Catalan`.
+
+## Fixed
+
+- `CoinbaseWalletSDK` connect popup being blocked on iOS Safari.
+- Revert back to using `MetaMaskSDK` for MetaMask connections.
+- Desktop deeplinking for LedgerLive.
+
+# 1.8.0
+
+This update adds support for [Coinbase Smart Wallet](https://smartwallet.dev), adds additional support for the latest versions of peer dependencies `wagmi` and `viem`, and removes the dependency `ethers` from `connectkit-next-siwe` in favor of `viem`'s [SIWE implementation](https://viem.sh/docs/siwe/actions/verifySiweMessage).
+
+## New
+
+- Adds support for [Coinbase Smart Wallet](https://smartwallet.dev).
+
+## Updated
+
+- Changed default setting for `enforceSupportedChains` to `false` to allow for a better default user and developer experience.
+- Updates peer dependency `viem` to `>=2.13.x`.
+
+## Deprecated
+
+- Removes dependency `ethers` from `connectkit-next-siwe` in favor of `viem`'s [SIWE implementation](https://viem.sh/docs/siwe/actions/verifySiweMessage).
+
+# 1.7.3
+
+This update fixes a few bugs and improves the stability of the QR code generation for WalletConnect and Coinbase Wallet.
+
+## Fixed
+
+- ENS resolution when `mainnet` not found in `createConfig`.
+- `WalletConnectConnector` regenerates QR codes when a user disconnects and attempts to reconnect their wallet.
+- `CoinbaseConnector` generated QR code now using a better supported URI.
+- Configured `projectId` now being passed to the `WalletConnectConnector` when opening "More" UI in mobile view.
+
+## Removed
+
+- References to `WalletConnectLegacy` (WalletConnect v1).
+
 # 1.7.2
 
 This update fixes an issue with the order of React Hooks, and improves the stability of the SIWE Provider.
